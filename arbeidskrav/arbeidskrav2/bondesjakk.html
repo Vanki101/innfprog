@@ -115,7 +115,7 @@
         var player = 1;
         let playermark = "X";
         //Dette skriver vi ut i <span>-tagene med id-ene "player" og "playermark" i <div>-tagen med id "playerturn"
-        document.getElementById("player").innerHTML = player; //Her var det ingen ";" som gjorde at koden ikke var aavsluttet.
+        document.getElementById("player").innerHTML = player; //Her var det ingen ";" som gjorde at koden ikke var avsluttet. rettet opp feil. 
         document.getElementById("playermark").innerHTML = playermark;
 
         //Så lager vi en teller for å se hvor mange spill vi har spilt:
@@ -162,7 +162,7 @@
         document.getElementById("celle3").addEventListener("click", function() {
             spill(3);
         });
-        document.getElementById("celle4").addEventListener("click", function() { //Var den tydelig skrivefeil "rettet opp"
+        document.getElementById("celle4").addEventListener("click", function() { //Rettet opp feil her. Var skrevet noe helt annet enn AddEventListener.
             spill(4);
         });
         document.getElementById("celle5").addEventListener("click", function() {
@@ -214,9 +214,12 @@
                     //Når brikken er plassert på spillerbrettet, må vi sjekke om den - og brikkene rundt - 
                     //utgjør en vinnerkombinasjon. Denne funksjonaliteten ligger i funksjonen sjekkVinner(),
                     //siden dette er et litt større sett med handlinger og kan gi noen ulike utfall.
-                    setTimeout(function() { 
-                    sjekkVinner(); // oppgave 3. Forsinker sjekk av vinner med 1 sekund
-                    }, 1000); // setTimeout venter 1000 ms ( så si 1 sekund) før sjekkVinner(function) kjøres
+
+                    /*oppgave 3:Legger inn innebygd funksjon for å sette en "forsinkelse" slik at det tar 1 sekund før en vinner blir deklarert.
+                    bruker setTimeout() som innebygdfunksjon og bruker sjekkvinner() funksjonen. inspirasjon kommer fra https://www.w3schools.com/jsref/met_win_settimeout.asp  
+                    Eksempel setTimeout(function, milliseconds, parameter1, ....paramenterN);*/ 
+                    setTimeout(sjekkVinner, 1000);
+
 
                 //Men, hvis cellen ikke er ledig...
                 } else {
@@ -241,7 +244,8 @@
                 }
             //Hvis spillstatus er false, avslutter vi funksjonen uten å utføre noen handlinger.
             } else {
-                //Så returnerer vi spillet // her var det ingen fullført kommentar...
+                //Så returnerer vi spillet  
+                //VAR EN FEIL MED KOMMENtAR "/" ordnet feil.
                 return;
             }
         }
@@ -271,13 +275,18 @@
                 if(brikke1 === brikke2 && brikke2 === brikke3) {
                     rundenVunnet = true;
 
-                    // oppgave 4: Endrer fargen på vinnerrekken til gul 
-                    document.getElementById("celle" + vinnerKomboPlass1).style.color = "#FFD700"; // Gullfarge
-                    document.getElementById("celle" + vinnerKomboPlass2).style.color = "#FFD700"; // Gullfarge
-                    document.getElementById("celle" + vinnerKomboPlass3).style.color = "#FFD700"; // Gullfarge
+                     /*oppgave 4: Vi vil at alle mulige vinner mønster skal endre farge på brikkene. Vi må gå gjennom alle vinner kombinasjonsmuligheter og legge til gul fargen.
+                     inspirasjon kommer fra https://www.w3schools.com/jsref/prop_style_color.asp
+                     eksempel: document.getElementById("myH2").style.color = "#ff0000"; */
+                        
+                    document.getElementById("celle" + vinnerKomboPlass1).style.color = "#FFD700"; 
 
+                    document.getElementById("celle" + vinnerKomboPlass2).style.color = "#FFD700";
+                    
+                    document.getElementById("celle" + vinnerKomboPlass3).style.color = "#FFD700";
 
-                    break; // avslutter når vinnerrekken er funnet
+                    break; // avslutter for løkken etter den har funnet en vinner, dette er for at den ikke skal repeteres. fant ingen andre muligheter uten å endre på selve for løkken.
+                    
                 }
             }
 
@@ -285,8 +294,10 @@
             if(rundenVunnet === true) {
                 //Skriv ut hvilken spiller som har vunnet
                 document.getElementById("playerturn").innerHTML = "Spiller " + player + " har vunnet!";
-                
-                //oppgave 2: legger til en linje med kode som gjør at bakgrunnen blir gul når en spiller vinner! 
+                 
+                //oppgave 2:<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Vi endrer bakgrunnsfargen når en spiller har vunnet,
+                 //Vi bruker playerturn som id og style.backgroundColor for å endrefargen til gul. Inspirasjon er hentet fra https://www.w3schools.com/jsref/prop_style_backgroundcolor.asp 
+                 //eksemplet jeg har brukt er document.getElementById("myDiv").style.backgroundColor = "lightblue";
                 document.getElementById("playerturn").style.backgroundColor = "#FFD700";
 
                 //Gjør restart spill-knappen synlig
