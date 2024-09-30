@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karakterkalkulator</title>
+
+    <!-- Enkel CSS for semantisk struktur -->
+    <style>
+        /* Grunnleggende styling for kropp og innhold */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Bruker section for hovedinnholdet */
+        section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            text-align: center;
+        }
+
+        /* Styling for input-felter */
+        input[type="number"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Knapp for å beregne karakter */
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Når knappen er deaktivert */
+        button:disabled {
+            background-color: #bbb;
+            cursor: not-allowed;
+        }
+
+        /* Resultatstyling */
+        output {
+            display: block;
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Section brukes som hovedcontainer for kalkulatoren -->
+    <section>
+        <!-- Overskrift med h1 for hovedinnhold -->
+        <h1>Karakterkalkulator</h1>
+
+        <!-- Form-element for poenginnputt -->
+        <form>
+            <label for="oppgave1">Oppgave 1 (Maks 10 poeng):</label>
+            <!-- Input-felt for poeng i oppgave 1 -->
+            <input type="number" id="oppgave1" min="0" max="10" placeholder="Poeng oppgave 1" required>
+
+            <label for="oppgave2">Oppgave 2 (Maks 12 poeng):</label>
+            <!-- Input-felt for poeng i oppgave 2 -->
+            <input type="number" id="oppgave2" min="0" max="12" placeholder="Poeng oppgave 2" required>
+
+            <!-- Beregningsknappen for kalkulatoren -->
+            <button type="button" id="beregnBtn" disabled>Beregn karakter</button>
+        </form>
+
+        <!-- Resultatet vises her med <output> -->
+        <output id="result"></output>
+    </section>
+
+    <script>
+        // Definerer karakterskalaen med terskelverdier
+        const grades = [
+            { grade: "F", threshold: 0 },
+            { grade: "E", threshold: 25 },
+            { grade: "D", threshold: 44 },
+            { grade: "C", threshold: 68 },
+            { grade: "B", threshold: 88 },
+            { grade: "A", threshold: 100 }
+        ];
+
+        // Henter felter og knappen fra HTML
+        const oppgave1 = document.getElementById('oppgave1');
+        const oppgave2 = document.getElementById('oppgave2');
+        const beregnBtn = document.getElementById('beregnBtn');
+        const result = document.getElementById('result');
+
+        // Aktiverer knappen når begge feltene har verdi
+        oppgave1.addEventListener('input', checkInputs);
+        oppgave2.addEventListener('input', checkInputs);
+
+        function checkInputs() {
+            // Hvis begge feltene har verdier, aktiver knappen
+            beregnBtn.disabled = oppgave1.value === '' || oppgave2.value === '';
+        }
+
+        // Beregn karakter når knappen trykkes
+        beregnBtn.addEventListener('click', function () {
+            // Henter poeng fra feltene
+            const poengOppgave1 = parseFloat(oppgave1.value);
+            const poengOppgave2 = parseFloat(oppgave2.value);
+
+            // Sjekker at brukeren har skrevet inn gyldige tall
+            if (isNaN(poengOppgave1) || isNaN(poengOppgave2)) {
+                result.textContent = "Skriv inn gyldige poeng.";
+                return;
+            }
+
+            // Maksimal poengsum for hver oppgave
+            const maksPoengOppgave1 = 10;
+            const maksPoengOppgave2 = 12;
+
+            // Kalkulerer total prosent basert på vekting
+            const totalProsent = (0.3 * (poengOppgave1 / maksPoengOppgave1 * 100)) +
+                                 (0.7 * (poengOppgave2 / maksPoengOppgave2 * 100));
+
+            // Finn riktig karakter basert på totalprosenten
+            let karakter = "F";
+            for (let i = grades.length - 1; i >= 0; i--) {
+                if (totalProsent >= grades[i].threshold) {
+                    karakter = grades[i].grade;
+                    break;
+                }
+            }
+
+            // Viser karakteren til brukeren
+            result.textContent = `Din karakter: ${karakter} (${totalProsent.toFixed(2)}%)`;
+        });
+    </script>
+
+    <!-- Kilder brukt til inspirasjon: 
+    - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section
+    - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form
+    - https://www.w3schools.com/tags/tag_output.asp -->
+</body>
+</html>

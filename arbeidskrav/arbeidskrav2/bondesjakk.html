@@ -285,7 +285,7 @@
                     
                     document.getElementById("celle" + vinnerKomboPlass3).style.color = "#FFD700";
 
-                    break; // avslutter for løkken etter den har funnet en vinner, dette er for at den ikke skal repeteres. fant ingen andre muligheter uten å endre på selve for løkken.
+                    break; // avslutter for løkken etter den har funnet en vinner, dette er for at den ikke skal repeteres.
                     
                 }
             }
@@ -320,6 +320,8 @@
             var celleteller = 0;
             while (celleteller < 9) {
                 document.getElementById("celle" + celleteller).innerHTML = "";
+                // Fjern fargen ved å sette den til standard (hvit eller annen ønsket farge)
+                document.getElementById("celle" + celleteller).style.color = ""; // Tilbakestill fargen..........................................
                 celleteller++;
                 
             }
@@ -330,6 +332,8 @@
             playermark = "X";
             // 4)
             document.getElementById("playerturn").innerHTML = 'Spiller <span id="player">1</span> (<span id="playermark">X</span>) sin tur:';
+             // Fjern bakgrunnsfargen fra playerturn
+             document.getElementById("playerturn").style.backgroundColor = ""; // Tilbakestill bakgrunnsfargen...............................
         }
     </script>
 </body>

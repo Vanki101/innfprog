@@ -17,11 +17,11 @@
     <header>
         <section id="player">
             <ul>
-                <li><img src="icons/shield.svg"> <span id="playerName">Marius</span></li>
+                <li><img src="icons/shield.svg"> <span id="playerName">Sipan</span></li>
                 <li><img src="icons/energydrink.svg" title="energy"> <span id="energy">3</span></li>
                 <li><img src="icons/notebook.svg"> <span id="notebookItems">0</span></li>
-                <li><img src="icons/solution.svg"> <span id="points">0</span> poeng</li>
-                <li><img src="icons/clock.svg"> <span id="duration">0</span></li>
+                <li><img src="icons/solution.svg"> <span id="points">5</span> poeng</li>
+                <li><img src="icons/clock.svg"> <span id="duration">130</span></li>
             </ul>
         </section>
         <img src="icons/c3_logo.svg" alt="Code Concept Collector" />
@@ -76,8 +76,35 @@
     <script>
         //PREPARE GAME CONFIG AND VARIABLES
         //TODO: config
+        const gameConfig = {
+            player: "Sipan",
+            energy: 3,
+            points: 5, 
+            duration: 130
+        };
+    
+        function updateplayerinfo() {
+
+        document.getElementById("playerName").textContent = gameConfig.player;
+        document.getElementById("energy").textContent = gameConfig.energy;
+        document.getElementById("points").textContent = gameConfig.points;
+        document.getElementById("duration").textContent = gameConfig.duration;
+
+        updateplayerinfo();
+
+        }
        
         //TODO: notebook
+        var notebook = {
+            variables : 3,
+            arrays: 2,
+            loops: 4,
+            functions: 7
+
+        }
+
+        document.getElementById("variables").innerHTML = notebook.variables
+        
         
 
         //TODO: print playerinfo to HTML
@@ -85,6 +112,8 @@
         //TODO: print notebook info to HTML
 
         //(BONUS) TODO: function for all prints
+
+         
         
     </script>
 </body>
