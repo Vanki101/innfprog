@@ -162,7 +162,7 @@
         document.getElementById("celle3").addEventListener("click", function() {
             spill(3);
         });
-        document.getElementById("celle4").addEventListener("click", function() { //Rettet opp feil her. Var skrevet noe helt annet enn AddEventListener.
+        document.getElementById("celle4").addEventListener("click", function() { //Rettet opp feil her. Var skrive feil på AddEventListener.
             spill(4);
         });
         document.getElementById("celle5").addEventListener("click", function() {
@@ -217,7 +217,7 @@
 
                     /*oppgave 3:Legger inn innebygd funksjon for å sette en "forsinkelse" slik at det tar 1 sekund før en vinner blir deklarert.
                     bruker setTimeout() som innebygdfunksjon og bruker sjekkvinner() funksjonen. inspirasjon kommer fra https://www.w3schools.com/jsref/met_win_settimeout.asp  
-                    Eksempel setTimeout(function, milliseconds, parameter1, ....paramenterN);*/ 
+                    Eksempel setTimeout(function, milliseconds);*/ 
                     setTimeout(sjekkVinner, 1000);
 
 
@@ -286,7 +286,7 @@
                     document.getElementById("celle" + vinnerKomboPlass3).style.color = "#FFD700";
 
                     break; // avslutter for løkken etter den har funnet en vinner, dette er for at den ikke skal repeteres.
-                    
+
                 }
             }
 
