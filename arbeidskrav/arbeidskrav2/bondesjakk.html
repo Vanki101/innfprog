@@ -295,7 +295,7 @@
                 //Skriv ut hvilken spiller som har vunnet
                 document.getElementById("playerturn").innerHTML = "Spiller " + player + " har vunnet!";
                  
-                //oppgave 2:<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Vi endrer bakgrunnsfargen når en spiller har vunnet,
+                //oppgave 2:Vi endrer bakgrunnsfargen når en spiller har vunnet,
                  //Vi bruker playerturn som id og style.backgroundColor for å endrefargen til gul. Inspirasjon er hentet fra https://www.w3schools.com/jsref/prop_style_backgroundcolor.asp 
                  //eksemplet jeg har brukt er document.getElementById("myDiv").style.backgroundColor = "lightblue";
                 document.getElementById("playerturn").style.backgroundColor = "#FFD700";
@@ -321,7 +321,15 @@
             while (celleteller < 9) {
                 document.getElementById("celle" + celleteller).innerHTML = "";
                 // Fjern fargen ved å sette den til standard (hvit eller annen ønsket farge)
-                document.getElementById("celle" + celleteller).style.color = ""; // Tilbakestill fargen..........................................
+                document.getElementById("celle" + celleteller).style.color = ""; 
+                    /* Tilbakestiller fargen på cellene:
+                    Når vi trykker på "spill igjen", henger gulfargen fra forrige vinnermønster igjen hvis vi ikke laster siden på nytt (Ctrl+R). 
+                    Vi tilbakestiller fargen til standard ved å sette `style.color` til en tom streng (""). 
+                    Koden er hentet fra følgende StackOverflow-diskusjon: 
+                    https://stackoverflow.com/questions/2500500/reset-element-color-to-default-stylesheet-color-jquery-javascript 
+                    */
+
+                
                 celleteller++;
                 
             }
@@ -333,7 +341,11 @@
             // 4)
             document.getElementById("playerturn").innerHTML = 'Spiller <span id="player">1</span> (<span id="playermark">X</span>) sin tur:';
              // Fjern bakgrunnsfargen fra playerturn
-             document.getElementById("playerturn").style.backgroundColor = ""; // Tilbakestill bakgrunnsfargen...............................
+             document.getElementById("playerturn").style.backgroundColor = ""; 
+             /* Tilbakestiller spiller fargen ettersom en spiller har vunnet
+            denne ble også med igjen på neste spill.
+            koden er insiprert fra https://stackoverflow.com/questions/2500500/reset-element-color-to-default-stylesheet-color-jquery-javascript
+            Da bruker jeg "Plain" Javascript metoden som er nevnt*/
         }
     </script>
 </body>
